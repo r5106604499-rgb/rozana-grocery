@@ -1,0 +1,373 @@
+type Value = 
+ variant {
+   "bool": bool;
+   float: float64;
+   "int": int;
+   "nat": nat;
+   "null";
+   "text": text;
+ };
+type UserRole = 
+ variant {
+   admin;
+   guest;
+   user;
+ };
+type UserProfile = 
+ record {
+   email: opt text;
+   name: text;
+ };
+type Timestamp = int;
+type SavedAddress = 
+ record {
+   address: Address;
+   id: AddressId;
+ };
+type SalesSummary = 
+ record {
+   ordersByStatus: vec record {
+                         text;
+                         nat;
+                       };
+   totalCustomers: nat;
+   totalOrders: nat;
+   totalProducts: nat;
+   totalRevenue: Paise;
+ };
+type Result__1 = 
+ variant {
+   err: Error;
+   ok;
+ };
+type Result = 
+ record {
+   hasMore: bool;
+   rows: vec vec Cell;
+ };
+type ProductInput = 
+ record {
+   brand: text;
+   categoryId: CategoryId;
+   description: text;
+   discountPrice: Paise;
+   imageUrl: text;
+   name: text;
+   originalPrice: Paise;
+   packSize: PackSize;
+   stockQuantity: nat;
+ };
+type ProductId = nat;
+type ProductFilter = 
+ record {
+   categoryId: opt CategoryId;
+   inStockOnly: bool;
+   maxPrice: opt Paise;
+   minPrice: opt Paise;
+   searchTerm: opt text;
+ };
+type Product = 
+ record {
+   brand: text;
+   categoryId: CategoryId;
+   createdAt: Timestamp;
+   description: text;
+   discountPercent: nat;
+   discountPrice: Paise;
+   id: ProductId;
+   imageUrl: text;
+   inStock: bool;
+   name: text;
+   originalPrice: Paise;
+   packSize: PackSize;
+   stockQuantity: nat;
+ };
+type PaymentMethod = 
+ variant {
+   cod;
+   online;
+ };
+type Paise = nat;
+type PackSize = text;
+type OrderStatus = 
+ variant {
+   confirmed;
+   delivered;
+   outForDelivery;
+   packing;
+   placed;
+ };
+type OrderLine = 
+ record {
+   brand: text;
+   imageUrl: text;
+   lineTotal: Paise;
+   name: text;
+   originalUnitPrice: Paise;
+   packSize: PackSize;
+   productId: ProductId;
+   quantity: nat;
+   unitPrice: Paise;
+ };
+type OrderId = nat;
+type Order = 
+ record {
+   address: Address;
+   couponCode: opt text;
+   couponDiscount: Paise;
+   deliveryCharge: Paise;
+   discountTotal: Paise;
+   id: OrderId;
+   lines: vec OrderLine;
+   paymentMethod: PaymentMethod;
+   placedAt: Timestamp;
+   status: OrderStatus;
+   subtotal: Paise;
+   total: Paise;
+   updatedAt: Timestamp;
+ };
+type NotificationId = nat;
+type Notification = 
+ record {
+   body: text;
+   createdAt: Timestamp;
+   id: NotificationId;
+   read: bool;
+   title: text;
+ };
+type HomeFeed = 
+ record {
+   bestSelling: vec Product;
+   discounted: vec Product;
+   newArrivals: vec Product;
+   recommended: vec Product;
+   todaysDeals: vec Product;
+ };
+type Error = 
+ variant {
+   AmbiguousAttribute: record {
+                         field: text;
+                         sources: vec text;
+                       };
+   FrontendOriginMismatch: record {
+                             expected: vec text;
+                             got: text;
+                           };
+   FrontendOriginsNotConfigured;
+   MalformedCandid;
+   MissingField: text;
+   MixedSsoSources: record {
+                      otherKeys: vec text;
+                      ssoKeys: vec text;
+                    };
+   NoAttributes;
+   Stale: record {ageNs: nat;};
+   UnknownNonce;
+   UntrustedSsoSource: record {domain: text;};
+ };
+type CustomerSummary = 
+ record {
+   email: opt text;
+   name: text;
+   orderCount: nat;
+   "principal": principal;
+   totalSpent: Paise;
+ };
+type CouponInput = 
+ record {
+   active: bool;
+   code: text;
+   description: text;
+   discountPercent: nat;
+   maxDiscount: Paise;
+   minOrderValue: Paise;
+ };
+type CouponId = nat;
+type Coupon = 
+ record {
+   active: bool;
+   code: text;
+   description: text;
+   discountPercent: nat;
+   id: CouponId;
+   maxDiscount: Paise;
+   minOrderValue: Paise;
+ };
+type CheckoutInput = 
+ record {
+   address: Address;
+   couponCode: opt text;
+   paymentMethod: PaymentMethod;
+ };
+type Cell = 
+ record {
+   name: text;
+   value: Value;
+ };
+type CategoryInput = 
+ record {
+   imageUrl: text;
+   name: text;
+ };
+type CategoryId = nat;
+type Category = 
+ record {
+   id: CategoryId;
+   imageUrl: text;
+   name: text;
+   productCount: nat;
+ };
+type CartView = 
+ record {
+   couponCode: opt text;
+   couponDiscount: Paise;
+   deliveryCharge: Paise;
+   discountTotal: Paise;
+   freeDeliveryThreshold: Paise;
+   itemCount: nat;
+   items: vec CartItemView;
+   subtotal: Paise;
+   total: Paise;
+ };
+type CartItemView = 
+ record {
+   brand: text;
+   imageUrl: text;
+   inStock: bool;
+   lineTotal: Paise;
+   name: text;
+   originalUnitPrice: Paise;
+   packSize: PackSize;
+   productId: ProductId;
+   quantity: nat;
+   unitPrice: Paise;
+ };
+type CartError = 
+ variant {
+   couponInactive: text;
+   couponMinOrderNotMet: record {
+                           actual: Paise;
+                           required: Paise;
+                         };
+   couponNotFound: text;
+   emptyCart;
+   invalidAddress: text;
+   invalidMobile: text;
+   invalidPincode: text;
+   invalidQuantity;
+   outOfStock: ProductId;
+   productNotFound: ProductId;
+ };
+type AddressId = nat;
+type Address = 
+ record {
+   area: text;
+   fullName: text;
+   houseFlat: text;
+   instructions: text;
+   landmark: text;
+   mobile: text;
+   pincode: text;
+ };
+service : {
+  _initialize_access_control: () -> ();
+  _internet_identity_sign_in_finish: () -> (Result__1);
+  _internet_identity_sign_in_start: () -> (blob);
+  /// Add a saved address.
+  addAddress: (address: Address) -> (AddressId);
+  /// Add a product to the caller's cart.
+  addToCart: (productId: ProductId, quantity: nat) -> (CartError);
+  /// Add a category (admin only).
+  adminAddCategory: (input: CategoryInput) -> (CategoryId);
+  /// Add a coupon (admin only).
+  adminAddCoupon: (input: CouponInput) -> (CouponId);
+  /// Add a product (admin only).
+  adminAddProduct: (input: ProductInput) -> (ProductId);
+  /// Delete a coupon (admin only).
+  adminDeleteCoupon: (couponId: CouponId) -> (bool);
+  /// Delete a product (admin only).
+  adminDeleteProduct: (productId: ProductId) -> (bool);
+  /// List all coupons (admin only).
+  adminListCoupons: () -> (vec Coupon) query;
+  /// List customer summaries (admin only).
+  adminListCustomers: () -> (vec CustomerSummary) query;
+  /// List all orders across customers (admin only).
+  adminListOrders: () -> (vec record {
+                                principal;
+                                Order;
+                              }) query;
+  /// Aggregate sales figures (admin only).
+  adminSalesSummary: () -> (SalesSummary) query;
+  /// Change an order's status (admin only).
+  adminSetOrderStatus: (customer: principal, orderId: OrderId, status:
+   OrderStatus) -> (bool);
+  /// Set a product's stock quantity (admin only).
+  adminSetStock: (productId: ProductId, stockQuantity: nat) -> (bool);
+  /// Update a coupon (admin only).
+  adminUpdateCoupon: (couponId: CouponId, input: CouponInput) -> (bool);
+  /// Update a product (admin only).
+  adminUpdateProduct: (productId: ProductId, input: ProductInput) -> (bool);
+  /// Apply a coupon code to the caller's cart.
+  applyCoupon: (code: text) -> (CartError);
+  assignCallerUserRole: (user: principal, role: UserRole) -> ();
+  /// Clear the caller's cart.
+  clearCart: () -> ();
+  /// Delete a saved address.
+  deleteAddress: (addressId: AddressId) -> (bool);
+  execute: (qJson: text) -> (Result) query;
+  /// Return the backend's behavioral API documentation as Markdown.
+  getApiDoc: () -> (text) query;
+  /// Get the caller's verified email, when available.
+  getCallerEmail: () -> (opt text) query;
+  /// Get the caller's profile.
+  getCallerUserProfile: () -> (opt UserProfile) query;
+  getCallerUserRole: () -> (UserRole) query;
+  /// Get the caller's cart with totals and applied coupon.
+  getCart: () -> (CartView) query;
+  /// Fetch one category.
+  getCategory: (categoryId: CategoryId) -> (opt Category) query;
+  /// Home screen feeds: deals, best selling, new arrivals, discounted, recommended.
+  getHomeFeeds: () -> (HomeFeed) query;
+  /// Fetch one of the caller's orders.
+  getMyOrder: (orderId: OrderId) -> (opt Order) query;
+  /// Fetch one product's detail.
+  getProduct: (productId: ProductId) -> (opt Product) query;
+  isCallerAdmin: () -> (bool) query;
+  /// List the active coupons available to shoppers (public, no admin role required).
+  listActiveCoupons: () -> (vec Coupon) query;
+  /// List the caller's saved addresses.
+  listAddresses: () -> (vec SavedAddress) query;
+  /// List all grocery categories with product counts.
+  listCategories: () -> (vec Category) query;
+  /// List the caller's orders, newest first.
+  listMyOrders: () -> (vec Order) query;
+  /// List the caller's notifications, newest first.
+  listNotifications: () -> (vec Notification) query;
+  /// List products in a category.
+  listProductsByCategory: (categoryId: CategoryId) -> (vec Product) query;
+  /// List the caller's recently viewed product ids, newest first.
+  listRecentlyViewed: () -> (vec ProductId) query;
+  /// List the caller's wishlist product ids.
+  listWishlist: () -> (vec ProductId) query;
+  /// Mark a notification as read.
+  markNotificationRead: (notificationId: NotificationId) -> (bool);
+  /// Place an order from the caller's cart.
+  placeOrder: (input: CheckoutInput) -> (OrderId);
+  /// Record a product as recently viewed by the caller.
+  recordRecentlyViewed: (productId: ProductId) -> ();
+  /// Remove the applied coupon from the caller's cart.
+  removeCoupon: () -> ();
+  /// Remove a product from the caller's cart.
+  removeFromCart: (productId: ProductId) -> (bool);
+  /// Save the caller's profile.
+  saveCallerUserProfile: (profile: UserProfile) -> ();
+  schema: () -> (text) query;
+  /// Search and filter products by name, brand, category and price range.
+  searchProducts: (filter: ProductFilter) -> (vec Product) query;
+  /// Set a cart line's quantity (0 removes it).
+  setCartQuantity: (productId: ProductId, quantity: nat) -> (CartError);
+  /// Toggle a product in the caller's wishlist. Returns true when now present.
+  toggleWishlist: (productId: ProductId) -> (bool);
+  /// Update a saved address.
+  updateAddress: (addressId: AddressId, address: Address) -> (bool);
+}

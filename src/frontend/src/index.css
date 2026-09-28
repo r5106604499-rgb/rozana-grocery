@@ -1,0 +1,243 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Figtree";
+  src: url("/assets/fonts/Figtree.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("/assets/fonts/PlusJakartaSans.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/assets/fonts/JetBrainsMono.woff2") format("woff2");
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --font-display: "Plus Jakarta Sans";
+    --font-body: "Figtree";
+    --font-mono: "JetBrains Mono";
+    --radius: 0.875rem;
+
+    /* Surfaces — crisp warm-white for outdoor glare legibility */
+    --background: 0.985 0.004 150;
+    --foreground: 0.185 0.028 158;
+    --card: 1 0 0;
+    --card-foreground: 0.185 0.028 158;
+    --popover: 1 0 0;
+    --popover-foreground: 0.185 0.028 158;
+
+    /* Brand — deep produce green, high contrast */
+    --primary: 0.52 0.13 158;
+    --primary-foreground: 0.99 0.004 158;
+
+    --secondary: 0.945 0.028 150;
+    --secondary-foreground: 0.28 0.05 158;
+    --muted: 0.955 0.014 150;
+    --muted-foreground: 0.5 0.022 158;
+
+    /* Accent — warm saffron for deals / discount badges */
+    --accent: 0.78 0.155 72;
+    --accent-foreground: 0.2 0.04 72;
+
+    --destructive: 0.55 0.21 27;
+    --destructive-foreground: 0.99 0.004 27;
+    --success: 0.58 0.15 154;
+    --success-foreground: 0.99 0.004 154;
+    --warning: 0.8 0.15 80;
+    --warning-foreground: 0.22 0.04 80;
+
+    /* Commerce semantics */
+    --price: 0.185 0.028 158;
+    --price-strike: 0.58 0.014 158;
+    --discount-badge: 0.55 0.21 27;
+    --discount-badge-foreground: 0.99 0.004 27;
+    --savings: 0.52 0.14 156;
+    --savings-foreground: 0.99 0.004 156;
+    --stock-in: 0.55 0.15 156;
+    --stock-low: 0.72 0.15 70;
+    --stock-out: 0.6 0.016 158;
+    --stock-out-foreground: 0.44 0.012 158;
+    /* Product image well — warm neutral so pack shots stay true */
+    --product-well: 0.965 0.012 120;
+
+    --border: 0.905 0.016 150;
+    --input: 0.9 0.016 150;
+    --ring: 0.52 0.13 158;
+
+    --chart-1: 0.52 0.13 158;
+    --chart-2: 0.78 0.155 72;
+    --chart-3: 0.55 0.21 27;
+    --chart-4: 0.6 0.12 200;
+    --chart-5: 0.66 0.14 120;
+
+    --sidebar: 0.985 0.008 150;
+    --sidebar-foreground: 0.185 0.028 158;
+    --sidebar-primary: 0.52 0.13 158;
+    --sidebar-primary-foreground: 0.99 0.004 158;
+    --sidebar-accent: 0.945 0.028 150;
+    --sidebar-accent-foreground: 0.28 0.05 158;
+    --sidebar-border: 0.905 0.016 150;
+    --sidebar-ring: 0.52 0.13 158;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(
+      135deg,
+      oklch(0.56 0.135 160) 0%,
+      oklch(0.47 0.12 152) 100%
+    );
+    --gradient-deal: linear-gradient(
+      135deg,
+      oklch(0.82 0.15 78) 0%,
+      oklch(0.72 0.17 55) 100%
+    );
+    --gradient-surface: linear-gradient(
+      180deg,
+      oklch(0.985 0.01 150) 0%,
+      oklch(0.96 0.016 145) 100%
+    );
+
+    --transition-smooth: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    --shadow-subtle: 0 1px 2px 0 oklch(0.185 0.028 158 / 0.05);
+    --shadow-elevated: 0 4px 14px -4px oklch(0.185 0.028 158 / 0.12);
+  }
+
+  .dark {
+    --background: 0.155 0.02 158;
+    --foreground: 0.94 0.012 150;
+    --card: 0.195 0.024 158;
+    --card-foreground: 0.94 0.012 150;
+    --popover: 0.225 0.026 158;
+    --popover-foreground: 0.94 0.012 150;
+
+    --primary: 0.74 0.15 158;
+    --primary-foreground: 0.155 0.02 158;
+
+    --secondary: 0.245 0.028 158;
+    --secondary-foreground: 0.86 0.012 150;
+    --muted: 0.245 0.028 158;
+    --muted-foreground: 0.63 0.016 150;
+
+    --accent: 0.79 0.15 74;
+    --accent-foreground: 0.165 0.03 74;
+
+    --destructive: 0.66 0.19 27;
+    --destructive-foreground: 0.155 0.02 27;
+    --success: 0.72 0.15 156;
+    --success-foreground: 0.155 0.02 156;
+    --warning: 0.79 0.15 82;
+    --warning-foreground: 0.165 0.03 82;
+
+    --price: 0.95 0.012 150;
+    --price-strike: 0.6 0.014 150;
+    --discount-badge: 0.66 0.19 27;
+    --discount-badge-foreground: 0.98 0.006 27;
+    --savings: 0.74 0.15 156;
+    --savings-foreground: 0.155 0.02 156;
+    --stock-in: 0.74 0.15 156;
+    --stock-low: 0.79 0.15 72;
+    --stock-out: 0.42 0.02 158;
+    --stock-out-foreground: 0.66 0.012 150;
+    --product-well: 0.235 0.024 150;
+
+    --border: 0.3 0.026 158;
+    --input: 0.3 0.026 158;
+    --ring: 0.74 0.15 158;
+
+    --chart-1: 0.74 0.15 158;
+    --chart-2: 0.79 0.15 74;
+    --chart-3: 0.66 0.19 27;
+    --chart-4: 0.68 0.12 200;
+    --chart-5: 0.72 0.14 120;
+
+    --sidebar: 0.195 0.024 158;
+    --sidebar-foreground: 0.94 0.012 150;
+    --sidebar-primary: 0.74 0.15 158;
+    --sidebar-primary-foreground: 0.155 0.02 158;
+    --sidebar-accent: 0.245 0.028 158;
+    --sidebar-accent-foreground: 0.86 0.012 150;
+    --sidebar-border: 0.3 0.026 158;
+    --sidebar-ring: 0.74 0.15 158;
+
+    --gradient-primary: linear-gradient(
+      135deg,
+      oklch(0.78 0.15 160) 0%,
+      oklch(0.66 0.14 152) 100%
+    );
+    --gradient-deal: linear-gradient(
+      135deg,
+      oklch(0.84 0.14 80) 0%,
+      oklch(0.72 0.17 58) 100%
+    );
+    --gradient-surface: linear-gradient(
+      180deg,
+      oklch(0.195 0.024 158) 0%,
+      oklch(0.17 0.022 155) 100%
+    );
+
+    --shadow-subtle: 0 1px 2px 0 oklch(0 0 0 / 0.4);
+    --shadow-elevated: 0 6px 18px -6px oklch(0 0 0 / 0.55);
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
+  }
+}
+
+@layer utilities {
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+  .bg-gradient-primary {
+    background-image: var(--gradient-primary);
+  }
+  .bg-gradient-deal {
+    background-image: var(--gradient-deal);
+  }
+  .bg-gradient-surface {
+    background-image: var(--gradient-surface);
+  }
+  .shadow-subtle {
+    box-shadow: var(--shadow-subtle);
+  }
+  .shadow-elevated {
+    box-shadow: var(--shadow-elevated);
+  }
+  /* Hide scrollbar on horizontal category rails */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Sticky bottom-nav safe area */
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .text-price {
+    @apply font-display font-bold tabular-nums tracking-tight;
+    color: oklch(var(--price));
+  }
+  .text-strike {
+    @apply line-through tabular-nums;
+    color: oklch(var(--price-strike));
+  }
+}

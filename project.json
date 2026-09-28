@@ -1,0 +1,22 @@
+{
+  "overview": "Rozana Grocery is a mobile-first Indian grocery and daily-essentials delivery app for browsing, ordering and tracking grocery, personal-care and household products.",
+  "features": [
+    "Browse 27 grocery, personal-care and household categories",
+    "Search products with category and price filters",
+    "Product cards with brand, pack size, price, discount and wishlist",
+    "Cart with quantity controls, coupons and delivery charges",
+    "Checkout with saved addresses, Cash on Delivery or Online Payment",
+    "Order tracking from Order Placed to Delivered",
+    "User account with profile, orders, addresses, wishlist and coupons",
+    "Admin panel for products, categories, orders, coupons and sales"
+  ],
+  "category": "grocery-delivery-app",
+  "tags": [
+    "grocery",
+    "e-commerce",
+    "india",
+    "mobile-first",
+    "delivery"
+  ],
+  "last_updated": "2026-09-28T17:35:59.073Z"
+}
