@@ -15,6 +15,7 @@ export default defineConfig({
   build: {
     emptyOutDir: true,
     sourcemap: false,
+    outdir': '../',
     minify: false,
   },
   optimizeDeps: {
