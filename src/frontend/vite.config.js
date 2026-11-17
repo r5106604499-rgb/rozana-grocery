@@ -10,7 +10,8 @@ const ii_url =
 
 process.env.II_URL = process.env.II_URL || ii_url;
 
-export default defineConfig({
+export default defineConfig({ 
+  'base: /r5106604499-rgb/',',
   logLevel: "error",
   build: {
     emptyOutDir: true,
